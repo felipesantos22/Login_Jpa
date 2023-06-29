@@ -27,13 +27,15 @@ public class LoginController {
     }
 
     @GetMapping("/{id}")
-    public ResponseEntity<Login> findById(@PathVariable int id){
-        return loginService.getById(id).map(record -> ResponseEntity.ok().body(record))
-                .orElse(ResponseEntity.notFound().build());
+    public Optional<Login> findById(@PathVariable int id){
+        return loginService.getById(id);
     }
-
     @PutMapping("/{id}")
     public Optional<Login> updateController(@PathVariable int id, @RequestBody Login login){
         return loginService.update(id, login);
+    }
+    @DeleteMapping("/{id}")
+    public Optional<Login> deleteController(@PathVariable int id){
+        return loginService.deleteService(id);
     }
 }

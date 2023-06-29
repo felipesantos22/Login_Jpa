@@ -35,4 +35,13 @@ public class LoginService {
                     return loginRepository.save(newLogin);
                 });
     }
+
+    public Optional<Login> deleteService(int id) {
+        return loginRepository.findById(id).map(
+                record -> {
+                    loginRepository.deleteById(id);
+                    return record;
+                }
+        );
+    }
 }
